@@ -1,0 +1,33 @@
+.topnav {
+    background-color: rgb(99, 132, 241);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.topnav li {
+    padding: 14px 16px;
+    width: 35%;
+    float: left;
+    text-align: center;
+    font-size: 20px;
+}
+
+.topnav li a {
+    text-decoration: none;
+    color: rgb(255, 184, 4);
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: rgba(102, 164, 231, 0.582);
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: red;
+    color: goldenrod;
+}
