@@ -1,15 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Item.css'
 
 const item = ({ title, description, srcNews, srcImg }) => {
-    const [showDisc, setShowDisc] = useState(false)
     return (
-        <div className="grid__item" onMouseEnter={() => { setShowDisc((prev) => !prev) }} onMouseLeave={() => { setShowDisc((prev) => !prev) }}>
+        <div className="grid__item" >
             <div className="card"><img className="card__img" src={srcImg} alt='NewsImage' />
                 <div className="card__content">
-                    <h2 className="card__header">{title} </h2>
-                    {showDisc && <p className="card__text">{description} </p>}
-                    <a href={srcNews}><button className="card__btn">
+                    <h2 className="card__header">{title || 'Title not provided'} </h2>
+                    <p className="card__text">{description || 'Description not provided'} </p>
+                    <a href={srcNews} target='_blank' rel="noopener noreferrer"><button className="card__btn">
                         Read Full Artical <span>&rarr;</span>
                     </button></a>
                 </div>

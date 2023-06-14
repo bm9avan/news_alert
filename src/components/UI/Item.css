@@ -44,6 +44,7 @@ html {
     overflow: hidden;
     box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.1);
     transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
 }
 
 .grid__item:hover {
@@ -68,6 +69,7 @@ a {
 .card__header {
     font-size: 2rem;
     font-weight: 600;
+    height: 100px;
     color: #0d0d0d;
     margin-bottom: 1.5rem;
     text-align: center;
@@ -78,11 +80,24 @@ a {
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
     line-height: 1.7;
-    color: #3d3d3d;
+    color: #5f0c0c;
     margin-bottom: 2.5rem;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 4rem 2rem;
+    background-color: rgba(255, 255, 255, 0.97);
+}
+
+.grid__item:hover .card__text {
+    display: block;
 }
 
 .card__btn {
+    position: relative;
     display: block;
     width: 100%;
     padding: 1.5rem;
@@ -94,6 +109,7 @@ a {
     border-radius: 0.4rem;
     transition: background-color 0.2s;
     cursor: pointer;
+    z-index: 10;
 }
 
 .card__btn:hover,
