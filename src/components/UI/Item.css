@@ -67,15 +67,19 @@ a {
 }
 
 .card__header {
+    position: relative;
     font-size: 2rem;
     font-weight: 600;
     color: #0d0d0d;
     margin-bottom: 1.5rem;
     text-align: center;
     height: 100px;
+    overflow-y: scroll;
+    z-index: 1;
 }
 
 .card__text {
+    position: relative;
     text-align: justify;
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
@@ -83,6 +87,7 @@ a {
     color: #5f0c0c;
     margin-bottom: 2.5rem;
     background-color: rgba(255, 255, 255, 0.97);
+    z-index: 10;
 }
 
 .hideDesc {
@@ -133,4 +138,17 @@ a {
 .card__btn:hover span,
 .card__btn:active span {
     margin-left: 1.5rem;
+}
+
+.card__header::-webkit-scrollbar{
+    width: 0;
+} 
+
+.showDesc::-webkit-scrollbar {
+    width: 4px;
+}
+
+.showDesc::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.47);
+    border-radius: 20px;
 }

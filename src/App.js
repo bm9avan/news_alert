@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import NavBar from './components/NavBar'
-import Item from './components/UI/Item'
+import Home from './components/pages/Home'
+import IndianNews from './components/pages/IndianNews'
+import './App.css'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 const App = () => {
-  const [data, setData] = useState(null);
   const [hideDesc, setHideDesc] = useState(false)
-
-  useEffect(() => {
-    fetch("https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=1c5d1e9e5c164430bd375e6327bedee9")
-      .then((v) => v.json())
-      .then((v) => {
-        setData(v.articles)
-      });
-  }, []);
 
   function descHandler(boolData) {
     setHideDesc(boolData)
@@ -20,24 +18,12 @@ const App = () => {
   return (
     <>
       <NavBar hideDesc={hideDesc} descHandler={descHandler} />
-      <div className="out">
-        <div className="grid">
-          {data && data.map((each) => {
-            return (
-              < Item
-                key={each.url}
-
-                classAdder={hideDesc ? 'show' : 'hide'}
-
-                title={each.title}
-                description={each.description}
-                srcNews={each.url}
-                srcImg={each.urlToImage}
-              />
-            )
-          })}
-        </div>
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home hideDesc={hideDesc} />} />
+          <Route path="/in" element={<IndianNews hideDesc={hideDesc} />} />
+        </Routes>
+      </Router>
     </>
   )
 }
