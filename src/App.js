@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import NavBar from './components/NavBar'
 import Home from './components/pages/Home'
 import IndianNews from './components/pages/IndianNews'
 import './App.css'
+import { Description } from './store/desc-context'
 import {
   BrowserRouter as Router,
   Route,
@@ -10,11 +11,8 @@ import {
 } from "react-router-dom";
 
 const App = () => {
-  const [hideDesc, setHideDesc] = useState(false)
-
-  function descHandler(boolData) {
-    setHideDesc(boolData)
-  }
+  const ctx=useContext(Description)
+  let { hideDesc: hideDesc, descHandler : descHandler}= ctx
   return (
     <>
       <NavBar hideDesc={hideDesc} descHandler={descHandler} />

@@ -2,8 +2,6 @@ import React from 'react'
 import './NavBar.css'
 
 const NavBar = ({ hideDesc, descHandler }) => {
-  // const [hideDesc, setHideDesc] = useState(false)
-  // when lifting state up should i use useState in parent? should i pass hideDesc as prop 
   return (
     <>
       <ul className='topnav'>
