@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import NewsItems from '../UI/NewsItems'
 import '../UI/NewsItems.css'
-import { Description } from '../../store/desc-context'
 
 const Home = () => {
-    const ctx = useContext(Description)
-    let { hideDesc } = ctx
     const date = new Date();
     const formatter = new Intl.DateTimeFormat('en-IN', {
         year: 'numeric',

@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Item from './Item'
+import { Description } from '../../store/desc-context'
 
-const NewsItems = ({ hideDesc, APIurl }) => {
+const NewsItems = ({ APIurl }) => {
+    const ctx = useContext(Description)
+    let { hideDesc } = ctx
     const [data, setData] = useState(null);
 
     useEffect(() => {
