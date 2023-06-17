@@ -33,6 +33,7 @@ const NewsItems = ({ APIurl }) => {
                     )
                 })}
             </div>
+            {data && data.length ===0 ? 'empty': ''}
         </div>
     )
 }

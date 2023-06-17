@@ -3,6 +3,7 @@ import NewsItems from '../UI/NewsItems'
 import '../UI/NewsItems.css'
 
 const Home = () => {
+
     const date = new Date();
     const formatter = new Intl.DateTimeFormat('en-IN', {
         year: 'numeric',
@@ -14,8 +15,7 @@ const Home = () => {
     formattedDateStart[2] = parseInt(formattedDateStart[2]) - 2
     return (
         <>
-            <NewsItems APIurl={`https://newsapi.org/v2/everything?q=ai&from=${formattedDateStart.join('-')}&to=${formattedDate.join('-')}&excludeDomains
-=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com&pageSize=60&apiKey=1c5d1e9e5c164430bd375e6327bedee9`} />
+            <NewsItems APIurl={`https://newsapi.org/v2/everything?q=ai&from=${formattedDateStart.join('-')}&to=${formattedDate.join('-')}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com&pageSize=60&apiKey=1c5d1e9e5c164430bd375e6327bedee9`} />
         </>
     )
 }
