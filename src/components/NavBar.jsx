@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './NavBar.css'
+import { Description } from '../store/desc-context'
 
-const NavBar = ({ hideDesc, descHandler }) => {
+const NavBar = () => {
+  const ctx = useContext(Description)
+  let { hideDesc, descHandler } = ctx
   return (
     <>
       <ul className='topnav'>

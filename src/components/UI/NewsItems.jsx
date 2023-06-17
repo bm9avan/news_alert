@@ -5,11 +5,9 @@ const NewsItems = ({ hideDesc, APIurl }) => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        console.log('start')
         fetch(APIurl)
             .then((v) => v.json())
             .then((v) => {
-                console.log(v)
                 setData(v.articles)
             });
     }, [APIurl]);
