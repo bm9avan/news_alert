@@ -8,6 +8,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Spinner from './components/UI/Spinner'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/in" element={<IndianNews />} />
+          <Route path="/search" element={<><Spinner /><h2>need to develop</h2></>} />
         </Routes>
       </Router>
     </>
