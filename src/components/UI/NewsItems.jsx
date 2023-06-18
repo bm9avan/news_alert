@@ -5,58 +5,37 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from './Spinner';
 
 function newsReduser(prevData, action) {
-    // console.log(prevData)
-    if (action.type === "first") {
-        console.log("reduser 1 one first", prevData.pageNo)
-        return { data: action.data, total: action.total, pageNo: prevData.pageNo + 1 }
+    if (action.type === "effect" && prevData.data !== null) {
+        return { data: (prevData.data).concat(action.data), total: action.total, pageNo: prevData.pageNo }
     }
-    else if (action.type === "scroll") {
-        console.log("in news reduser 2", prevData.data, "prev", action.data, action.type)
-        return { data: (prevData.data).concat(action.data), total: action.total, pageNo: prevData.pageNo + 1 }
+    else if (action.type === "scroll" && prevData.data !== null) {
+        return { data: (prevData.data), total: prevData.total, pageNo: prevData.pageNo + 1 }
     } else {
-        console.log("else reduser 3 ", action.type)
-        return { data: (action.data), total: action.total, pageNo: prevData.pageNo + 1 }
+        return { data: (action.data), total: action.total, pageNo: prevData.pageNo }
     }
 }
 
 const NewsItems = ({ type, from, to }) => {
     const ctx = useContext(Description)
     let { hideDesc } = ctx
-    // const [data, setData] = useState(null);
-    // const [total, setTotal] = useState(0);
-    // const [pageNo, setPageno] = useState(1);
     let [news, dispatchNews] = useReducer(newsReduser, {
         data: null,
         total: 0,
         pageNo: 1
     })
 
-    
-    let url = `https://newsapi.org/v2/${type}?q=ai&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com&pageSize=30&language=en&apiKey=764acf1cc62041bbaa28e93e0422fedb&page=${news.pageNo}`
+    // this component is reendering due to change in pageNo, prevent this using useMemo
     useEffect(() => {
+        let url = `https://newsapi.org/v2/${type}?q=ai&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com&pageSize=3&language=en&apiKey=764acf1cc62041bbaa28e93e0422fedb&page=${news.pageNo}`
         fetch(url)
             .then((v) => v.json())
             .then((v) => {
-                console.log("in effect", v)
-                // setTotal(v.totalResults)
-                // setData(v.articles)
-                dispatchNews({ type: "first", data: v.articles, total: v.totalResults })
+                dispatchNews({ type: "effect", data: v.articles, total: v.totalResults })
             });
-        // setPageno((p) => p + 1)
-    }, [])
+    }, [type, from, to, news.pageNo])
 
     let fetchMoreData = async () => {
-        fetch(url)
-            .then((v) => v.json())
-            .then((v) => {
-                console.log("in fetch", v)
-                // setTotal(v.totalResults)
-                // setData((prev) => {
-                //     prev.concat(v.articles)
-                // })
-                dispatchNews({ type: "scroll", data: v.articles })
-            });
-        // setPageno((p) => p + 1)
+        dispatchNews({ type: "scroll" })
     }
 
     return (
@@ -68,7 +47,6 @@ const NewsItems = ({ type, from, to }) => {
         >
             <div className="out">
                 <div className="grid">
-                    {console.log(news.data)}
                     {news.data && news.data.map((each) => {
                         return (
                             < Item
