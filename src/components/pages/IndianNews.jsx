@@ -4,9 +4,7 @@ import '../UI/NewsItems.css'
 
 const IndianNews = () => {
     return (
-        <>
-            <NewsItems type={'top-headlines'} />
-        </>
+        <NewsItems type='top-headlines' />
     )
 }
 

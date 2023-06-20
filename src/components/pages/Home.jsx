@@ -14,7 +14,7 @@ const Home = () => {
     const formattedDateStart = formatter.format(date).split('/').reverse();
     formattedDateStart[2] = parseInt(formattedDateStart[2]) - 2
     return (
-        <NewsItems type={'everything'} from={formattedDate} to={formattedDateStart} />
+        <NewsItems type='everything' q='ai' from={formattedDate} to={formattedDateStart} />
     )
 }
 

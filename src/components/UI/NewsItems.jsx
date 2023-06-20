@@ -15,7 +15,7 @@ function newsReduser(prevData, action) {
     }
 }
 
-const NewsItems = ({ type, from, to }) => {
+const NewsItems = ({ type, q, from, to }) => {
     const ctx = useContext(Description)
     let { hideDesc } = ctx
     let [news, dispatchNews] = useReducer(newsReduser, {
@@ -26,13 +26,13 @@ const NewsItems = ({ type, from, to }) => {
 
     // this component is reendering due to change in pageNo, prevent this using useMemo
     useEffect(() => {
-        let url = `https://newsapi.org/v2/${type}?q=ai&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com&pageSize=3&language=en&apiKey=764acf1cc62041bbaa28e93e0422fedb&page=${news.pageNo}`
+        let url = `https://newsapi.org/v2/${type}?q=${q}&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com,ycombinator.com&pageSize=30&language=en&apiKey=1c5d1e9e5c164430bd375e6327bedee9&page=${news.pageNo}`
         fetch(url)
             .then((v) => v.json())
             .then((v) => {
                 dispatchNews({ type: "effect", data: v.articles, total: v.totalResults })
             });
-    }, [type, from, to, news.pageNo])
+    }, [type, q, from, to, news.pageNo])
 
     let fetchMoreData = async () => {
         dispatchNews({ type: "scroll" })

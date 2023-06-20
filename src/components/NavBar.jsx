@@ -12,7 +12,7 @@ const NavBar = () => {
         <li><a href="/in">Indian News</a></li>
         <li>
           <form action="search" method="get" >
-            <input type="text" name="s" id="search" />
+            <input type="text" name="q" id="search" required />
             <input type="submit" value="search" />
           </form>
         </li>
