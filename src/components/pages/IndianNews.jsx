@@ -3,9 +3,8 @@ import NewsItems from '../UI/NewsItems'
 import '../UI/NewsItems.css'
 
 const IndianNews = () => {
-    console.log("in app")
     return (
-        <NewsItems type='top-headlines'/>
+        <NewsItems q="india"/>
     )
 }
 
