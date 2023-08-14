@@ -8,6 +8,7 @@ function newsReduser(prevData, action) {
     if (action.type === "effect" && prevData.data !== null) {
         return { data: (prevData.data).concat(action.data), total: action.total, pageNo: prevData.pageNo }
     }
+    //scroll will just increase page number by 1 this will run useEffect and add data in effect type
     else if (action.type === "scroll" && prevData.data !== null) {
         return { data: (prevData.data), total: prevData.total, pageNo: prevData.pageNo + 1 }
     } else {
@@ -23,10 +24,9 @@ const NewsItems = ({ type, q, from, to }) => {
         total: 0,
         pageNo: 1
     })
-
     // this component is reendering due to change in pageNo, prevent this using useMemo
     useEffect(() => {
-        let url = `https://newsapi.org/v2/${type}?q=${q}&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com,ycombinator.com&pageSize=30&language=en&apiKey=1c5d1e9e5c164430bd375e6327bedee9&page=${news.pageNo}`
+        let url = `https://newsapi.org/v2/${type}?q=${q||"india"}&from=${from}&to=${to}&excludeDomains=readwrite.com,news.slashdot.org,slashdot.org,techdirt.com,reuters.com,ycombinator.com&pageSize=30&language=en&apiKey=${process.env.REACT_APP_API_URL}&page=${news.pageNo}`
         fetch(url)
             .then((v) => v.json())
             .then((v) => {
