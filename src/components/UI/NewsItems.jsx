@@ -3,6 +3,7 @@ import Item from './Item'
 import { Description } from '../../store/desc-context'
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from './Spinner';
+import axios from 'axios';
 
 const date = new Date();
 const formatter = new Intl.DateTimeFormat('en-IN', {
@@ -38,9 +39,10 @@ const NewsItems = ({ q }) => {
     })
     // this component is reendering due to change in pageNo, prevent this using useMemo
     useEffect(() => {
-        let url = `http://api.mediastack.com/v1/news?access_key=${process.env.REACT_APP_API_URL}&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
-        fetch(url)
-            .then((v) => v.json())
+        let url = `http://api.mediastack.com/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
+
+        axios.get(url)
+            .then((v) => v.data)
             .then((v) => {
                 dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
             });
@@ -62,7 +64,7 @@ const NewsItems = ({ q }) => {
                     {news.data && news.data.map((each) => {
                         return (
                             < Item
-                                key={each.url}
+                                key={Math.random().toString()}
                                 classAdder={hideDesc ? 'show' : 'hide'}
                                 title={each.title || 'Title not provided'}
                                 description={each.description || 'Description not provided'}
