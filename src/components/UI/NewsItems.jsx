@@ -41,6 +41,12 @@ const NewsItems = ({ q }) => {
     useEffect(() => {
         let url = `http://api.mediastack.com/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
 
+    //     fetch(url)
+    //         .then((v) => v.json())
+    //         .then((v) => {
+    //             dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
+    //         });
+    // }, [q, news.pageNo])
         axios.get(url)
             .then((v) => v.data)
             .then((v) => {
