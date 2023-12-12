@@ -44,6 +44,7 @@ const NewsItems = ({ q }) => {
         fetch(url)
             .then((v) => v.json())
             .then((v) => {
+                console.log("v", v)
                 dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
             });
     }, [q, news.pageNo])
