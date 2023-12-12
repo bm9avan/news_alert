@@ -41,15 +41,23 @@ const NewsItems = ({ q }) => {
     useEffect(() => {
         let url = `/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
 
-        fetch(url)
-            .then((v) => {
-                console.log("v", v)
-                return v.json()
-            })
-                .then((v) => {
-                console.log("v", v)
-                dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
-            });
+        // fetch(url)
+        //     .then((v) => {
+        //         console.log("v", v)
+        //         return v.json()
+        //     })
+        //         .then((v) => {
+        //         console.log("v", v)
+        //         dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
+        //     });
+        async function fethNews(){
+            const res= await fetch(url)
+            const v = await res.json()
+            console.log("v", v)
+            dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
+
+        }
+        fethNews()
     }, [q, news.pageNo])
         // axios.get(url)
         //     .then((v) => v.data)
