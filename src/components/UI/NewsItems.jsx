@@ -42,8 +42,11 @@ const NewsItems = ({ q }) => {
         let url = `/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
 
         fetch(url)
-            .then((v) => v.json())
             .then((v) => {
+                console.log("v", v)
+                return v.json()
+            })
+                .then((v) => {
                 console.log("v", v)
                 dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
             });
