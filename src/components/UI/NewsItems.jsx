@@ -39,20 +39,20 @@ const NewsItems = ({ q }) => {
     })
     // this component is reendering due to change in pageNo, prevent this using useMemo
     useEffect(() => {
-        let url = `http://api.mediastack.com/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
+        let url = `/v1/news?access_key=f0e2ffa0e012933a702de5a9e1aa23fd&keywords=${q}&date=${to},${from}&languages=en&offset=${25*news.pageNo}`
 
-    //     fetch(url)
-    //         .then((v) => v.json())
-    //         .then((v) => {
-    //             dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
-    //         });
-    // }, [q, news.pageNo])
-        axios.get(url)
-            .then((v) => v.data)
+        fetch(url)
+            .then((v) => v.json())
             .then((v) => {
                 dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
             });
     }, [q, news.pageNo])
+        // axios.get(url)
+        //     .then((v) => v.data)
+        //     .then((v) => {
+        //         dispatchNews({ type: "effect", data: v.data, total: v.pagination.total })
+        //     });
+    // }, [q, news.pageNo])
 
     let fetchMoreData = async () => {
         dispatchNews({ type: "scroll" })
